@@ -87,7 +87,7 @@ function get_box() {
 				.replace(".", "")
 				.replace("’", "")
 				.replace("-totem", "");
-			var pok = `<img class="trainer-pok left-side" src="./img/newhd/${pok_name}.png" data-id="${
+			var pok = `<img class="trainer-pok left-side" src="./img/newhd		/${pok_name}.png" data-id="${
 				names[i].split("[")[0]
 			}">`;
 
@@ -112,7 +112,7 @@ function get_trainer_preview(poks) {
 			.replace(".", "")
 			.replace("’", "")
 			.replace("-totem", "");
-		var pok_html = `<img class="trainer-pok right-side" src="./img/newhd/${pok_name}.png" data-id="${
+		var pok_html = `<img class="trainer-pok right-side" src="./img/newhd		/${pok_name}.png" data-id="${
 			poks[i].split("[")[0]
 		}">`;
 
@@ -501,3 +501,6 @@ $(document).ready(function () {
 	TR_NAMES = get_trainer_names();
 	get_box();
 });
+
+
+

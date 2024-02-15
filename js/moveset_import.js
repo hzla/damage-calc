@@ -78,9 +78,22 @@ function serialize(array, separator) {
 	return text;
 }
 
-function getAbility(row) {
+function isInt(value) {
+  return !isNaN(value) && 
+         parseInt(Number(value)) == value && 
+         !isNaN(parseInt(value, 10));
+}
+
+function getAbility(row, species=false) {
+	if (isInt(row[1])) {
+		console.log(species)
+		var ability = abils[species][parseInt(row[1])]
+		console.log(ability)
+		return ability
+	}
+
 	var ability = row[1] ? row[1].trim() : '';
-	if (calc.ABILITIES[9].indexOf(ability) !== -1) return ability;
+	if (calc.ABILITIES[8].indexOf(ability) !== -1) return ability;
 }
 
 function getTeraType(row) {
@@ -216,13 +229,15 @@ function addToDex(poke) {
 		dexObject.ability = poke.ability;
 	}
 
+	console.log(poke.ability)
 
-	if (isInt(poke.ability)) {
-		console.log("ability updated")
-		dexObject.ability = pokedex[poke.name]['abilities'][parseInt(poke.ability)]
-	}
+	// console.log(poke.ability)
+	// if (isInt(poke.ability)) {
+	// 	console.log("ability updated")
+	// 	dexObject.ability = abils[poke.name][parseInt(poke.ability)]
+	// }
 
-	
+
 	if (poke.teraType !== undefined) {
 		dexObject.teraType = poke.teraType;
 	}
@@ -297,7 +312,8 @@ function addSets(pokes, name) {
 					currentPoke.nameProp = name;
 				}
 				currentPoke.isCustomSet = true;
-				currentPoke.ability = getAbility(rows[i + 1].split(":"));
+				
+				currentPoke.ability = getAbility(rows[i + 3].split(":"), currentPoke.name);
 				currentPoke.teraType = getTeraType(rows[i + 1].split(":"));
 				currentPoke = getStats(currentPoke, rows, i + 1);
 				currentPoke = getMoves(currentPoke, rows, i);
