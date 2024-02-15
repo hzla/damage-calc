@@ -1,0 +1,90 @@
+.trainer-poks {
+	margin-bottom: 20px;
+}
+
+.trainer-pok-list {
+	display: flex;
+	flex-wrap: wrap;
+	width: 300px;
+	margin-top: 20px;
+}
+
+.player-poks {
+	height: auto;
+	min-width: 100%;
+	overflow: scroll;
+	min-height: 96px;
+	max-height: 595px;
+	display: flex;
+	justify-content: flex-start;
+}
+
+.player-party {
+	background-size: 100% 595px;
+	background-repeat: no-repeat;
+	height: auto;
+	width: 300px;
+	min-width: 100%;
+	overflow: scroll;
+	min-height: 96px;
+	justify-content: space-between;
+	display: none;
+	justify-content: flex-start;
+}
+
+.player-party .trainer-pok-container {
+	width: calc(16.66% - 3px);
+	margin: 0;
+	padding: 0;
+}
+
+.player-party .trainer-pok.left-side {
+	background-size: cover;
+	height: 100%;
+	width: 100%;
+}
+
+.trainer-pok {
+	height: auto;
+	width: calc(16.66% - 10px);
+	cursor: pointer;
+	box-sizing: border-box;
+	border: 1px solid #282a36;
+	border-radius: 10px;
+	margin: 5px;
+	background-position-x: -20px;
+	background-position-y: -20px;
+}
+
+.trainer-pok {
+	background: none;
+	border: 1px solid rgb(0, 0, 0, 0);
+}
+
+.trainer-pok.right-side {
+	width: calc(33% - 10px);
+}
+
+.trainer-pok:hover {
+	border: 1px solid #f18906;
+	border-radius: 10px;
+}
+
+.trainer-pok-container {
+	display: flex;
+	flex-direction: column;
+	margin-left: 10px;
+	align-items: center;
+	border: 1px solid #282a36;
+	padding: 5px;
+	width: calc(20% - 22px);
+}
+
+.trainer-pok-container:hover {
+	border: 1px solid #1abc9c;
+	border-radius: 10px;
+}
+
+.player-party .trainer-pok-container:hover {
+	border: none;
+}
