@@ -82,12 +82,12 @@ function get_box() {
 			var pok_name = names[i]
 				.split(" (")[0]
 				.toLowerCase()
-				.replace(" ", "-")
+				.replace(" ", "")
 				.replace(".", "")
 				.replace(".", "")
 				.replace("’", "")
 				.replace("-totem", "");
-			var pok = `<img class="trainer-pok left-side" src="./img/newhd		/${pok_name}.png" data-id="${
+			var pok = `<img class="trainer-pok left-side" src="./img/newhd/${pok_name}.png" data-id="${
 				names[i].split("[")[0]
 			}">`;
 
@@ -107,12 +107,12 @@ function get_trainer_preview(poks) {
 		var pok_name = pok
 			.split(" (")[0]
 			.toLowerCase()
-			.replace(" ", "-")
+			.replace(" ", "")
 			.replace(".", "")
 			.replace(".", "")
 			.replace("’", "")
 			.replace("-totem", "");
-		var pok_html = `<img class="trainer-pok right-side" src="./img/newhd		/${pok_name}.png" data-id="${
+		var pok_html = `<img class="trainer-pok right-side" src="./img/newhd/${pok_name}.png" data-id="${
 			poks[i].split("[")[0]
 		}">`;
 
@@ -178,58 +178,13 @@ function getSet(setName, selector) {
 			: undefined;
 		var regSets = pokemonName in setdex && setName in setdex[pokemonName];
 
-		if (randset) {
-			var listItems = randdex[pokemonName].items
-				? randdex[pokemonName].items
-				: [];
-			var listAbilities = randdex[pokemonName].abilities
-				? randdex[pokemonName].abilities
-				: [];
-			if (gen >= 3)
-				$(selector).closest(".poke-info").find(".ability-pool").show();
-			$(selector)
-				.closest(".poke-info")
-				.find(".extraSetAbilities")
-				.text(listAbilities.join(", "));
-			if (gen >= 2)
-				$(selector).closest(".poke-info").find(".item-pool").show();
-			$(selector)
-				.closest(".poke-info")
-				.find(".extraSetItems")
-				.text(listItems.join(", "));
-			if (gen >= 9) {
-				$(selector).closest(".poke-info").find(".role-pool").show();
-				$(selector).closest(".poke-info").find(".tera-type-pool").show();
-			}
-			var listRoles = randdex[pokemonName].roles
-				? Object.keys(randdex[pokemonName].roles)
-				: [];
-			$(selector)
-				.closest(".poke-info")
-				.find(".extraSetRoles")
-				.text(listRoles.join(", "));
-			var listTeraTypes = [];
-			if (randdex[pokemonName].roles) {
-				for (var roleName in randdex[pokemonName].roles) {
-					var role = randdex[pokemonName].roles[roleName];
-					for (var q = 0; q < role.teraTypes.length; q++) {
-						if (listTeraTypes.indexOf(role.teraTypes[q]) === -1) {
-							listTeraTypes.push(role.teraTypes[q]);
-						}
-					}
-				}
-			}
-			pokeObj.find(".teraType").val(listTeraTypes[0] || pokemon.types[0]);
-			$(selector)
-				.closest(".poke-info")
-				.find(".extraSetTeraTypes")
-				.text(listTeraTypes.join(", "));
-		} else {
-			$(selector).closest(".poke-info").find(".ability-pool").hide();
-			$(selector).closest(".poke-info").find(".item-pool").hide();
-			$(selector).closest(".poke-info").find(".role-pool").hide();
-			$(selector).closest(".poke-info").find(".tera-type-pool").hide();
-		}
+		
+		
+		$(selector).closest(".poke-info").find(".ability-pool").hide();
+		$(selector).closest(".poke-info").find(".item-pool").hide();
+		$(selector).closest(".poke-info").find(".role-pool").hide();
+		$(selector).closest(".poke-info").find(".tera-type-pool").hide();
+
 		if (regSets || randset) {
 			var set = regSets
 				? correctHiddenPower(setdex[pokemonName][setName])
@@ -456,28 +411,15 @@ function get_current_trainer() {
 
 $(document).on("click", ".trainer-pok.left-side", function () {
 	var set = $(this).attr("data-id");
-	$(".player").val(set);
-	getSet(set, $(".player")[0]);
+	$('input.set-selector').first().val(set).change()
 	$(".player .select2-chosen").text(set);
-	if ($(".info-group:not(.opp) > * > .forme").is(":visible")) {
-		$(".info-group:not(.opp) > * > .forme").change();
-	}
-
-	var right_max_hp = $("#p1 .max-hp").text();
-	$("#p1 .current-hp").val(right_max_hp).change();
 });
+
 
 $(document).on("click", ".trainer-pok.right-side", function () {
 	var set = $(this).attr("data-id");
-	// $('.opposing').val(set)
-	getSet(set, $(".opposing")[0]);
+	$('input.set-selector').last().val(set).change()
 	$(".opposing .select2-chosen").text(set);
-	// if ($('.info-group:not(.opp) > * > .forme').is(':visible')) {
-	//     $('.info-group:not(.opp) > * > .forme').change()
-	// }
-
-	var left_max_hp = $("#p2 .max-hp").text();
-	$("#p2 .current-hp").val(left_max_hp).change();
 });
 
 $(document).on("change", ".opposing", function () {
